@@ -7,7 +7,7 @@ import (
 
 func TestGetAPIKey(t *testing.T) {
 	header := http.Header(map[string][]string{
-		"Authorization": "",
+		"Authorization": {""},
 	})
 	res, err := GetAPIKey(header)
 	if err == nil {
