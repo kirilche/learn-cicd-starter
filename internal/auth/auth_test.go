@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func TestAuthFail(t *testing.T) {
+func TestGetAPIKey(t *testing.T) {
 	header := http.Header(map[string][]string{
-		"Authorization": {"asuh", "dud"},
+		"Authorization": "",
 	})
 	res, err := GetAPIKey(header)
 	if err == nil {
