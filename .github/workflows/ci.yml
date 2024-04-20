@@ -36,7 +36,8 @@ jobs:
 
       - name: perform test
         run: go test -cover ./...
-
-      - name: Install gosec
-        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
-      
+        
+      - name: Gosec Security Checker 
+        uses: securego/gosec@v2.19.0
+        with:
+          args: ./...
