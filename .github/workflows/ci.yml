@@ -5,7 +5,22 @@ on:
     branches: [main]
 
 jobs:
-  
+  style:
+    name: Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      
+      - uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
+          install-go: true
+
+      - name: Go Fmt
+        run: test -z $(go fmt ./...) 
+
   tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -21,16 +36,3 @@ jobs:
 
       - name: perform test
         run: go test -cover ./...
-  
-  style:
-    name: Style
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Go Fmt
-        run: test -z $(go fmt ./...)
-      
-      - uses: dominikh/staticcheck-action@v1
-        with:
-          version: "latest"
-          install-go: false
