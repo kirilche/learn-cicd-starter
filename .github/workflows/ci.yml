@@ -5,6 +5,22 @@ on:
     branches: [main]
 
 jobs:
+  style:
+    name: Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      
+      - uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
+          install-go: true
+
+      - name: Go Fmt
+        run: test -z $(go fmt ./...) 
+
   tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -20,3 +36,8 @@ jobs:
 
       - name: perform test
         run: go test -cover ./...
+        
+      # - name: Gosec Security Checker 
+      #   uses: securego/gosec@v2.19.0
+      #   with:
+      #     args: ./...
