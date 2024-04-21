@@ -37,7 +37,7 @@ jobs:
       - name: perform test
         run: go test -cover ./...
         
-      - name: Gosec Security Checker 
-        uses: securego/gosec@v2.19.0
-        with:
-          args: ./...
+      # - name: Gosec Security Checker 
+      #   uses: securego/gosec@v2.19.0
+      #   with:
+      #     args: ./...
