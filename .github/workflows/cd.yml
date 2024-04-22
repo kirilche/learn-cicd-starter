@@ -22,3 +22,17 @@ jobs:
           ./scripts/buildprod.sh
         shell: bash
 
+      - name: push artifact
+        uses: 'google-github-actions/auth@v2'
+        with:
+          project_id: 'boot-go'
+          workload_identity_provider: projects/824939037841/locations/global/workloadIdentityPools/github/providers/my-repo
+        
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 472.0.0'
+        
+      - name: 'Use gcloud CLI'
+        run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/boot-go/notely-ar-repo/notely:latest .'
+
