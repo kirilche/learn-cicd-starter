@@ -42,3 +42,9 @@ jobs:
 
       - name: 'Submit container build'
         run: 'gcloud builds submit --suppress-logs --tag us-central1-docker.pkg.dev/boot-go/notely-ar-repo/notely:latest .'
+
+      - name: 'Deploy to Cloud Run'
+        run: |
+              gcloud run deploy notely
+              --image us-central1-docker.pkg.dev/boot-go/notely-ar-repo/notely:latest
+              --region REGION --allow-unauthenticated --project boot-go --max-instances=4
