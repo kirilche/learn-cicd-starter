@@ -4,6 +4,11 @@ on:
 
 jobs:
   deploy:
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     name: Deploy
     runs-on: ubuntu-latest
 
@@ -22,7 +27,7 @@ jobs:
           ./scripts/buildprod.sh
         shell: bash
 
-      - name: push artifact
+      - id: auth
         uses: 'google-github-actions/auth@v2'
         with:
           project_id: 'boot-go'
@@ -33,6 +38,7 @@ jobs:
         with:
           version: '>= 472.0.0'
         
-      - name: 'Use gcloud CLI'
+
+      - name: 'Submit container build'
         run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/boot-go/notely-ar-repo/notely:latest .'
 
