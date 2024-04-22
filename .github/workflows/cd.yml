@@ -38,6 +38,7 @@ jobs:
         with:
           version: '>= 472.0.0'
         
+
       - name: 'Submit container build'
         run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/boot-go/notely-ar-repo/notely:latest .'
 
